@@ -41,7 +41,7 @@ Infrastructure.DependencyResolver
     .DependencyResolverService
     .RegisterInfrastructure(builder.Services);
 
-
+builder.Services.AddCors(); //Cors is needed for the frontend to work
 
 var app = builder.Build();
 
@@ -50,7 +50,12 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors(builder => builder //Configure cors
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
 }
+
 
 app.UseHttpsRedirection();
 
